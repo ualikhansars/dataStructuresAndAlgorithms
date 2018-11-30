@@ -7,8 +7,8 @@ struct LinkedListNode {
 };
 
 class LinkedList {
-	struct LinkedListNode* head;
-	struct LinkedListNode* tail;
+	LinkedListNode* head;
+	LinkedListNode* tail;
 
 public:
 	LinkedList();
