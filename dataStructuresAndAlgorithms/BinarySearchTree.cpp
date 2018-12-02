@@ -16,6 +16,27 @@ BinarySearchTree::BinarySearchTree(): root(nullptr)
 {
 }
 
+void BinarySearchTree::Delete(TreeNode* node)
+{
+	if (node->left == nullptr)
+		Transplant(node, node->right);
+	else if (node->right == nullptr)
+		Transplant(node, node->left);
+	else
+	{
+		TreeNode* y = Minumum(node->right);
+		if (y->parent != node)
+		{
+			Transplant(y, y->right);
+			y->right = node->right;
+			y->right->parent = y;
+		}
+		Transplant(node, y);
+		y->left = node->left;
+		y->left->parent = y;
+	}
+}
+
 TreeNode* BinarySearchTree::Search(TreeNode* root, int key)
 {
 	if (root == nullptr || key == root->key)
@@ -50,7 +71,8 @@ void BinarySearchTree::Insert(int value)
 
 TreeNode* BinarySearchTree::Minumum(TreeNode* node)
 {
-	while (node->left != nullptr) {
+	while (node->left != nullptr) 
+	{
 		node = node->left;
 	}
 	return node;
@@ -58,7 +80,8 @@ TreeNode* BinarySearchTree::Minumum(TreeNode* node)
 
 TreeNode* BinarySearchTree::Maximum(TreeNode* node)
 {
-	while (node->right != nullptr) {
+	while (node->right != nullptr) 
+	{
 		node = node->right;
 	}
 	return node;
@@ -69,7 +92,8 @@ TreeNode* BinarySearchTree::Successor(TreeNode* node)
 	if (node->right != nullptr)
 		return Minumum(node->right);
 	TreeNode* parent = node->parent;
-	while (parent != nullptr and node == parent->right) {
+	while (parent != nullptr and node == parent->right) 
+	{
 		node = parent;
 		parent = parent->parent;
 	}
@@ -79,5 +103,4 @@ TreeNode* BinarySearchTree::Successor(TreeNode* node)
 
 TreeNode::TreeNode(int key, TreeNode* left, TreeNode* right, TreeNode* p)
 	: key(key), left(left), right(right), parent(p)
-{ 
-}
+{}
