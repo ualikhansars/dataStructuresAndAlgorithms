@@ -20,6 +20,8 @@ public:
 
 	BinarySearchTree();
 
+	void Delete(TreeNode* node);
+
 	TreeNode* Search(TreeNode* root, int key);
 
 	void Insert(int value);
