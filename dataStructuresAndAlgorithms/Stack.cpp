@@ -1,19 +1,9 @@
 #include <iostream>
 #include <vector>
+#include "Stack.h"
 
-class Stack 
-{
-	short top = -1;
-	const short MAX_SIZE = 1000;
-public:
-	std::vector<int> elements;
-	
-	bool stackEmpty();
-	void push(int value);
-	int pop();
-};
-
-bool Stack::stackEmpty() {
+template <typename T>
+bool Stack<T>::stackEmpty() {
 	if (top < 0) {
 		return true;
 	}
@@ -22,7 +12,8 @@ bool Stack::stackEmpty() {
 	}
 }
 
-void Stack::push(int value)
+template <typename T>
+void Stack<T>::push(const T& value)
 {
 	if (elements.size() > MAX_SIZE) {
 		std::cout << "Stack overflow" << std::endl;
@@ -32,13 +23,13 @@ void Stack::push(int value)
 		elements[top] = value;
 	}
 }
-
-int Stack::pop() {
+template <typename T>
+T* Stack<T>::pop() {
 	if (stackEmpty()) {
 		std::cout << "Stack underflow" << std::endl;
 	}
 	else {
 		top = top - 1;
-		return elements[++top];
+		return &elements[++top];
 	}
 }
